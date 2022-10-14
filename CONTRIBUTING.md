@@ -17,10 +17,6 @@
 ```terminal
 git clone https://github.com/Anurag1-28/Simple-Calculator.git
 ```
-- Navigate to project directory.
-```terminal
-cd Hacktoberfest2022
-```
 
 
 - Add your Changes
