@@ -15,7 +15,7 @@
 - Clone on your local machine
 
 ```terminal
-git clone https://github.com/fineanmol/Hacktoberfest2022.git
+git clone https://github.com/Anurag1-28/Simple-Calculator.git
 ```
 - Navigate to project directory.
 ```terminal
@@ -34,7 +34,7 @@ git commit -m "Relevant message"
 ```
 - Then push 
 ```markdown
-git push origin my-new-branch
+git push 
 ```
 
 
