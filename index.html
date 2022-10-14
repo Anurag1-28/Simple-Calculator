@@ -12,48 +12,121 @@
 <body>
     <div class="container">
         <h1>Calculator</h1>
+        <input type="hidden" name="op1" id="op1" />
+	<input type="hidden" name="opr" id="opr" />
+	<input type="hidden" name="op2" id="op2" />
         <div class="calculator dark">
             <div class="theme-toggler active">
                 <i class="toggler-icon"></i>
             </div>
             <div class="display-screen">
-                <div id="display"></div>
+                <div id="display">
+                <input type="text" name="stmt" id="stmt" style="text-align:right; border: none;  background-color: transparent; color: azure; font-size: medium;" />
+                </div>
+                <div id="display">
+                    <input type="text" name="result" id="result" style="text-align:right; border: none; background-color: transparent; color: beige; font-size: x-large;" />
+                </div>
             </div>
             <div class="buttons">
                 <table>
                     <tr>
-                        <td><button class="btn-operator" id="clear">C</button></td>
-                        <td><button class="btn-operator" id="/">&divide;</button></td>
-                        <td><button class="btn-operator" id="*">&times;</button></td>
+                        <td><button class="btn-operator" id="clear" onclick="javascript:clearText()">C</button></td>
+                        <td><button class="btn-operator" id="/" onclick="javascript:getValue('/')">&divide;</button></td>
+                        <td><button class="btn-operator" id="*" onclick="javascript:getValue('*')">&times;</button></td>
                         <td><button class="btn-operator" id="backspace"><</button></td>
                     </tr>
                     <tr>
-                        <td><button class="btn-number" id="7">7</button></td>
-                        <td><button class="btn-number" id="8">8</button></td>
-                        <td><button class="btn-number" id="9">9</button></td>
-                        <td><button class="btn-operator" id="-">-</button></td>
+                        <td><button class="btn-number" id="7" onclick="javascript:getValue('7')">7</button></td>
+                        <td><button class="btn-number" id="8" onclick="javascript:getValue('8')">8</button></td>
+                        <td><button class="btn-number" id="9" onclick="javascript:getValue('9')">9</button></td>
+                        <td><button class="btn-operator" id="-" onclick="javascript:getValue('-')">-</button></td>
                     </tr>
                     <tr>
-                        <td><button class="btn-number" id="4">4</button></td>
-                        <td><button class="btn-number" id="5">5</button></td>
-                        <td><button class="btn-number" id="6">6</button></td>
-                        <td><button class="btn-operator" id="+">+</button></td>
+                        <td><button class="btn-number" id="4" onclick="javascript:getValue('4')">4</button></td>
+                        <td><button class="btn-number" id="5" onclick="javascript:getValue('5')">5</button></td>
+                        <td><button class="btn-number" id="6" onclick="javascript:getValue('6')">6</button></td>
+                        <td><button class="btn-operator" id="+" onclick="javascript:getValue('+')">+</button></td>
                     </tr>
                     <tr>
-                        <td><button class="btn-number" id="1">1</button></td>
-                        <td><button class="btn-number" id="2">2</button></td>
-                        <td><button class="btn-number" id="3">3</button></td>
-                        <td rowspan="2"><button class="btn-equal" id="equal">=</button></td>
+                        <td><button class="btn-number" id="1" onclick="javascript:getValue('1')">1</button></td>
+                        <td><button class="btn-number" id="2" onclick="javascript:getValue('2')">2</button></td>
+                        <td><button class="btn-number" id="3" onclick="javascript:getValue('3')">3</button></td>
+                        <td rowspan="2"><button class="btn-equal" id="equal" onclick="javascript:calculateAnswer()">=</button></td>
                     </tr>
                     <tr>
-                        <td><button class="btn-operator" id="(">(</button></td>
-                        <td><button class="btn-number" id="0">0</button></td>
-                        <td><button class="btn-operator" id=")">)</button></td>
+                        <!--<td><button class="btn-operator" id="(">(</button></td>-->
+                        <td colspan="2"><button class="btn-number" id="zero" onclick="javascript:getValue('0')">0</button></td>
+                        <td><button class="btn-operator" id="." onclick="javascript:getValue('.')">.</button></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-    <script src="assets/script.js"></script>
+    <script>
+
+var flag=0;
+var rescalc=0;
+	function getValue(n)
+	{
+		if(rescalc==1){
+            clearText();
+            rescalc=0;
+        }
+        document.getElementById("result").value+=n;
+		
+		if((n=='+') || (n=='-') || (n=='*') || (n=='/'))
+		{
+			flag=1;
+			document.getElementById("opr").value=n;
+			exit;
+		}
+		if(flag==0)
+		{
+			document.getElementById("op1").value+=n;
+		}
+		if(flag==1)
+		{
+			document.getElementById("op2").value+=n;
+		}
+	}
+	function calculateAnswer()
+	{
+        var b1 = document.getElementById("op1").value;
+		var b2 = document.getElementById("op2").value;
+		var op = document.getElementById("opr").value;
+		var nb1 = Number(b1);
+		var nb2 = Number(b2);
+		var res;
+		
+		switch(op)
+		{
+			case '+':
+				res=nb1+nb2;
+				break;
+			case '-':
+				res=nb1-nb2;
+				break;
+			case '*':
+				res=nb1*nb2;
+				break;
+			case '/':
+				res=nb1/nb2;
+				break;
+		}
+        document.getElementById('stmt').value=document.getElementById('result').value;
+        document.getElementById('result').value=res; 
+        rescalc=1;
+    }
+	function clearText()  
+    {
+        flag=0;
+        document.getElementById("op1").value = "";
+        document.getElementById("op2").value = "";
+        document.getElementById("opr").value = "";
+        document.getElementById("result").value = "";
+        document.getElementById('stmt').value='';
+    }
+
+    </script>
 </body>
 </html>
